@@ -15,6 +15,8 @@ let threadName = {};
 let processName = {};
 let firstLogTimestamp = undefined;
 
+const colors = ['red','orange','brown','green','blue','purple'];
+
 (async function main() {
 
   for (let i = 2; process.argv[i]; i++) {
@@ -57,11 +59,67 @@ let firstLogTimestamp = undefined;
 
   console.log(`Found ${interestingIpc.length} interesting sets of IPC latency`);
   interestingIpc.forEach(set => {
-    writeGraph(set, `${graphDirectory}/plot-ipc-${set[0].fromPid}-` +
-      `${set[0].toPid}-${Math.floor(set[0].timeStamp)}-${set.length}.svg`);
+    let filenameBase = `${graphDirectory}/plot-ipc-${set[0].fromPid}-` +
+      `${set[0].toPid}-${Math.floor(set[0].timeStamp)}-${set.length}`;
+
+    writeGraph(set, `${filenameBase}.svg`);
+    writeHtml(set, `${filenameBase}.html`);
   });
 
 })();
+
+function writeHtml(messages, filename) {
+  const out = fs.createWriteStream(filename, {flags: 'w'});
+  const start = messages[0].timeStamp - messages[0].sinceSend;
+  out.write(`
+    <style>
+      table td + td {border-left: 1px solid black}
+      table tr + tr {border-left: 1px solid black}
+      :target { background-color: #ddd }
+    </style>
+    <table>
+      <tr>
+        <th>Time</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Seq</th>
+        <th>#</th>
+        <th>Message</th>
+        <th>Size</th>
+        <th>IO Recv</th>
+        <th>IO Write</th>
+        <th>IO Read</th>
+        <th>Process</th>
+      </tr>\n`);
+
+  messages.forEach((m,i) => {
+    out.write(`
+      <tr style="color:${colors[i%colors.length]}" id="${i+1}">
+        <td>${m.timeStamp}
+             (start + ${truncate(m.timeStamp - m.sinceSend - start)} ms)</td>
+        <td>${processName[m.fromPid] || m.fromPid} /
+            ${threadName[m.sendTid] || m.sendTid}</td>
+        <td>${processName[m.toPid] || m.toPid} /
+            ${threadName[m.thread] || m.thread}</td>
+        <td>${m.seqno}</td>
+        <td><b>${i+1}</b></td>
+        <td>${m.messageType}</td>
+        <td>${m.size}</td>
+        <td>${truncate(m.sinceSend - m.sinceHandoff)}</td>
+        <td>${truncate(m.sinceSend - m.sinceWrite)}</td>
+        <td>${truncate(m.sinceSend - m.sinceRead)}</td>
+        <td>${truncate(m.sinceSend)}</td>
+      </tr>\n`);
+  });
+
+  out.write("</table>\n");
+  out.end();
+}
+
+// Truncates to three decimal places
+function truncate(number) {
+  return Math.round(number*1000)/1000;
+}
 
 function writeGraph(messages, filename) {
   console.log(`Writing ${filename}`);
@@ -114,7 +172,6 @@ function writeGraph(messages, filename) {
     return x;
   })();
 
-  const colors = ['red','orange','brown','green','blue','purple'];
   const messageHeight = 10;
 
   const canvas = SVG(document.documentElement).
@@ -134,6 +191,7 @@ function writeGraph(messages, filename) {
     const labelStyle = {size: messageHeight, fill: colors[i % colors.length] };
     const delayStyle = {width: 1, color: colors[i % colors.length],
         dasharray: '2,2'};
+    const link = filename.replace(/.*\//,'').replace('svg','html') + `#${i+1}`;
 
     // Sending thread to writing I/O thread
     rungs.push({
@@ -144,6 +202,7 @@ function writeGraph(messages, filename) {
       style:      lineStyle,
       labelStyle: labelStyle,
       label:      `${i+1}. ${message.messageType} (${message.size})`,
+      link:       link,
     });
 
     // Writing I/O thread blocked
@@ -156,6 +215,7 @@ function writeGraph(messages, filename) {
         style:      delayStyle,
         labelStyle: labelStyle,
         label:      `${i+1}. ${message.messageType} (${message.size})`,
+        link:       link,
       });
     }
 
@@ -168,6 +228,7 @@ function writeGraph(messages, filename) {
       style:      lineStyle,
       labelStyle: labelStyle,
       label:      `${i+1}. ${message.messageType} (${message.size})`,
+      link:       link,
     });
 
     // Reading I/O thread to receiving/processing thread
@@ -179,6 +240,7 @@ function writeGraph(messages, filename) {
       style:      lineStyle,
       labelStyle: labelStyle,
       label:      `${i+1}. ${message.messageType} (${message.size})`,
+      link:       link,
     });
 
   });
@@ -215,7 +277,7 @@ function writeGraph(messages, filename) {
 
     canvas.text(rung.label).
       path(`M${x1} ${y1-messageHeight*1.5} L${x2} ${y2-messageHeight*1.5}`).
-      font(rung.labelStyle);
+      font(rung.labelStyle).linkTo(rung.link);
   });
 
   const out = fs.createWriteStream(filename, {flags: 'w'});

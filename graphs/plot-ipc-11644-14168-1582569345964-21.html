@@ -1,0 +1,378 @@
+
+    <style>
+      table td + td {border-left: 1px solid black}
+      table tr + tr {border-left: 1px solid black}
+      :target { background-color: #ddd }
+    </style>
+    <table>
+      <tr>
+        <th>Time</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Seq</th>
+        <th>#</th>
+        <th>Message</th>
+        <th>Size</th>
+        <th>IO Recv</th>
+        <th>IO Write</th>
+        <th>IO Read</th>
+        <th>Process</th>
+      </tr>
+
+      <tr style="color:red" id="1">
+        <td>1582569345964.961
+             (start + 0 ms)</td>
+        <td>Parent Process /
+            GeckoMain</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>23</td>
+        <td><b>1</b></td>
+        <td>PContent::Msg_FlushInputEventQueue</td>
+        <td>120</td>
+        <td>0</td>
+        <td>39.086</td>
+        <td>39.105</td>
+        <td>2128.518</td>
+      </tr>
+
+      <tr style="color:orange" id="2">
+        <td>1582569345964.961
+             (start + 0 ms)</td>
+        <td>Parent Process /
+            GeckoMain</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>24</td>
+        <td><b>2</b></td>
+        <td>PContent::Msg_ResumeInputEventQueue</td>
+        <td>120</td>
+        <td>0</td>
+        <td>39.1</td>
+        <td>39.106</td>
+        <td>2128.518</td>
+      </tr>
+
+      <tr style="color:brown" id="3">
+        <td>1582569345964.961
+             (start + 0.001 ms)</td>
+        <td>Parent Process /
+            GeckoMain</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>22</td>
+        <td><b>3</b></td>
+        <td>PContent::Msg_SuspendInputEventQueue</td>
+        <td>120</td>
+        <td>0</td>
+        <td>39.083</td>
+        <td>39.091</td>
+        <td>2128.517</td>
+      </tr>
+
+      <tr style="color:green" id="4">
+        <td>1582569345964.961
+             (start + 0.025 ms)</td>
+        <td>Parent Process /
+            GeckoMain</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>21</td>
+        <td><b>4</b></td>
+        <td>PContent::Msg_SetInputEventQueueEnabled</td>
+        <td>120</td>
+        <td>0</td>
+        <td>39.07</td>
+        <td>39.079</td>
+        <td>2128.493</td>
+      </tr>
+
+      <tr style="color:blue" id="5">
+        <td>1582569345964.961
+             (start + 0.073 ms)</td>
+        <td>Parent Process /
+            GeckoMain</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>25</td>
+        <td><b>5</b></td>
+        <td>PContent::Msg_InitProcessHangMonitor</td>
+        <td>236</td>
+        <td>0</td>
+        <td>39.024</td>
+        <td>39.03</td>
+        <td>2128.445</td>
+      </tr>
+
+      <tr style="color:purple" id="6">
+        <td>1582569345964.961
+             (start + 0.179 ms)</td>
+        <td>Parent Process /
+            GeckoMain</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>20</td>
+        <td><b>6</b></td>
+        <td>PContent::Msg_SetPluginList</td>
+        <td>144</td>
+        <td>0</td>
+        <td>39.057</td>
+        <td>39.066</td>
+        <td>2128.339</td>
+      </tr>
+
+      <tr style="color:red" id="7">
+        <td>1582569345964.961
+             (start + 0.361 ms)</td>
+        <td>Parent Process /
+            GeckoMain</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>19</td>
+        <td><b>7</b></td>
+        <td>PContent::Msg_InitJSWindowActorInfos</td>
+        <td>14956</td>
+        <td>0</td>
+        <td>38.993</td>
+        <td>39.057</td>
+        <td>2128.157</td>
+      </tr>
+
+      <tr style="color:orange" id="8">
+        <td>1582569345965.961
+             (start + 0.394 ms)</td>
+        <td>Parent Process /
+            GeckoMain</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>26</td>
+        <td><b>8</b></td>
+        <td>PContent::Msg_InitProfiler</td>
+        <td>236</td>
+        <td>0</td>
+        <td>38.794</td>
+        <td>38.799</td>
+        <td>2129.124</td>
+      </tr>
+
+      <tr style="color:brown" id="9">
+        <td>1582569345966.965
+             (start + 0.487 ms)</td>
+        <td>Parent Process /
+            GeckoMain</td>
+        <td>Web Content /
+            8872</td>
+        <td>1</td>
+        <td><b>9</b></td>
+        <td>PProfiler::Msg_EnsureStarted</td>
+        <td>256</td>
+        <td>0</td>
+        <td>2129.962</td>
+        <td>2130.023</td>
+        <td>2130.035</td>
+      </tr>
+
+      <tr style="color:green" id="10">
+        <td>1582569345964.961
+             (start + 0.658 ms)</td>
+        <td>Parent Process /
+            GeckoMain</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>18</td>
+        <td><b>10</b></td>
+        <td>PContent::Msg_SetProcessSandbox</td>
+        <td>128</td>
+        <td>0</td>
+        <td>39.124</td>
+        <td>39.129</td>
+        <td>2127.86</td>
+      </tr>
+
+      <tr style="color:blue" id="11">
+        <td>1582569345968.962
+             (start + 0.695 ms)</td>
+        <td>Parent Process /
+            GeckoMain</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>28</td>
+        <td><b>11</b></td>
+        <td>PContent::Msg_GMPsChanged</td>
+        <td>252</td>
+        <td>0</td>
+        <td>38.727</td>
+        <td>38.739</td>
+        <td>2131.824</td>
+      </tr>
+
+      <tr style="color:purple" id="12">
+        <td>1582569345966.965
+             (start + 0.937 ms)</td>
+        <td>Parent Process /
+            GeckoMain</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>27</td>
+        <td><b>12</b></td>
+        <td>PContent::Msg_SetPermissionsWithKey</td>
+        <td>1036</td>
+        <td>0</td>
+        <td>38.775</td>
+        <td>38.789</td>
+        <td>2129.585</td>
+      </tr>
+
+      <tr style="color:red" id="13">
+        <td>1582569345968.962
+             (start + 31.841 ms)</td>
+        <td>Parent Process /
+            GeckoMain</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>29</td>
+        <td><b>13</b></td>
+        <td>PContent::Msg_DataStoragePut</td>
+        <td>272</td>
+        <td>0</td>
+        <td>7.545</td>
+        <td>7.552</td>
+        <td>2100.678</td>
+      </tr>
+
+      <tr style="color:orange" id="14">
+        <td>1582569345968.962
+             (start + 47.079 ms)</td>
+        <td>Parent Process /
+            GeckoMain</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>-5</td>
+        <td><b>14</b></td>
+        <td>PNecko::Reply_InitSocketProcessBridge</td>
+        <td>244</td>
+        <td>0</td>
+        <td>0.018</td>
+        <td>0.042</td>
+        <td>2085.44</td>
+      </tr>
+
+      <tr style="color:brown" id="15">
+        <td>1582569345968.962
+             (start + 47.995 ms)</td>
+        <td>Parent Process /
+            GeckoMain</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>-6</td>
+        <td><b>15</b></td>
+        <td>PContent::Reply_CreateAudioIPCConnection</td>
+        <td>152</td>
+        <td>0</td>
+        <td>0.01</td>
+        <td>0.036</td>
+        <td>2084.524</td>
+      </tr>
+
+      <tr style="color:green" id="16">
+        <td>1582569345969.962
+             (start + 74.378 ms)</td>
+        <td>Parent Process /
+            GeckoMain</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>30</td>
+        <td><b>16</b></td>
+        <td>PContent::Msg_NotifyVisited</td>
+        <td>408</td>
+        <td>0</td>
+        <td>0.067</td>
+        <td>0.1</td>
+        <td>2059.141</td>
+      </tr>
+
+      <tr style="color:blue" id="17">
+        <td>1582569345969.962
+             (start + 94.739 ms)</td>
+        <td>Parent Process /
+            GeckoMain</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>31</td>
+        <td><b>17</b></td>
+        <td>PContent::Msg_NotifyVisited</td>
+        <td>600</td>
+        <td>0</td>
+        <td>0.118</td>
+        <td>0.217</td>
+        <td>2038.78</td>
+      </tr>
+
+      <tr style="color:purple" id="18">
+        <td>1582569345969.962
+             (start + 386.112 ms)</td>
+        <td>Parent Process /
+            GeckoMain</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>32</td>
+        <td><b>18</b></td>
+        <td>PContent::Msg_PreferenceUpdate</td>
+        <td>984</td>
+        <td>0</td>
+        <td>0.023</td>
+        <td>0.089</td>
+        <td>1747.407</td>
+      </tr>
+
+      <tr style="color:red" id="19">
+        <td>1582569345969.962
+             (start + 391.912 ms)</td>
+        <td>Parent Process /
+            GeckoMain</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>33</td>
+        <td><b>19</b></td>
+        <td>PContent::Msg_PreferenceUpdate</td>
+        <td>996</td>
+        <td>0</td>
+        <td>0.03</td>
+        <td>0.17</td>
+        <td>1741.607</td>
+      </tr>
+
+      <tr style="color:orange" id="20">
+        <td>1582569345969.962
+             (start + 485.359 ms)</td>
+        <td>Parent Process /
+            GeckoMain</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>34</td>
+        <td><b>20</b></td>
+        <td>PContent::Msg_DataStoragePut</td>
+        <td>268</td>
+        <td>0</td>
+        <td>0.12</td>
+        <td>0.155</td>
+        <td>1648.16</td>
+      </tr>
+
+      <tr style="color:brown" id="21">
+        <td>1582569345969.962
+             (start + 611.676 ms)</td>
+        <td>Parent Process /
+            GeckoMain</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>35</td>
+        <td><b>21</b></td>
+        <td>PContent::Msg_NotifyVisited</td>
+        <td>460</td>
+        <td>0</td>
+        <td>0.141</td>
+        <td>0.205</td>
+        <td>1521.843</td>
+      </tr>
+</table>
