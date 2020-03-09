@@ -19,11 +19,13 @@ const colors = ['red','orange','brown','green','blue','purple'];
 
 (async function main() {
 
+  let profile = undefined;
+
   for (let i = 2; process.argv[i]; i++) {
     if (process.argv[i].match(/json$/)) {
       const profileFile = process.argv[i];
       console.log(`Reading profile ${profileFile}...`);
-      const profile = JSON.parse(fs.readFileSync(profileFile,{encoding:'utf8'}));
+      profile = JSON.parse(fs.readFileSync(profileFile,{encoding:'utf8'}));
       profile.threads.forEach(thread => {
         threadName[thread.tid] = thread.name;
         processName[thread.pid] = thread.processName;
@@ -62,7 +64,7 @@ const colors = ['red','orange','brown','green','blue','purple'];
     let filenameBase = `${graphDirectory}/plot-ipc-${set[0].fromPid}-` +
       `${set[0].toPid}-${Math.floor(set[0].timeStamp)}-${set.length}`;
 
-    writeGraph(set, `${filenameBase}.svg`);
+    writeGraph(set, `${filenameBase}.svg`, profile);
     writeHtml(set, `${filenameBase}.html`);
   });
 
@@ -121,7 +123,7 @@ function truncate(number) {
   return Math.round(number*1000)/1000;
 }
 
-function writeGraph(messages, filename) {
+function writeGraph(messages, filename, profile) {
   console.log(`Writing ${filename}`);
 
   const window = require('svgdom');
@@ -147,12 +149,15 @@ function writeGraph(messages, filename) {
     threadName[msg.readTid] = "IO Receiver";
   });
 
+  const fromPid = messages[0].fromPid;
+  const toPid = messages[0].toPid;
+
   let actorIds = [].concat(Array.from(sendTids), Array.from(writeTids),
                            Array.from(readTids), Array.from(workerTids));
 
   const lifelineCount = actorIds.length;
-  let pidToActor = {};
-  actorIds.forEach((pid,i) => pidToActor[pid] = i);
+  let pidTidToActor = {};
+  actorIds.forEach((pidTid,i) => pidTidToActor[pidTid] = i);
 
   const labels = actorIds.map(x => {
     let [p,t] = x.split('/');
@@ -195,9 +200,9 @@ function writeGraph(messages, filename) {
 
     // Sending thread to writing I/O thread
     rungs.push({
-      fromActor:  pidToActor[`${message.fromPid}/${message.sendTid}`],
+      fromActor:  pidTidToActor[`${message.fromPid}/${message.sendTid}`],
       fromTime:   message.timeStamp - message.sinceSend - startTime,
-      toActor:    pidToActor[`${message.fromPid}/${message.writeTid}`],
+      toActor:    pidTidToActor[`${message.fromPid}/${message.writeTid}`],
       toTime:     message.timeStamp - message.sinceHandoff - startTime,
       style:      lineStyle,
       labelStyle: labelStyle,
@@ -208,9 +213,9 @@ function writeGraph(messages, filename) {
     // Writing I/O thread blocked
     if (message.sinceHandoff != message.sinceWrite) {
       rungs.push({
-        fromActor:  pidToActor[`${message.fromPid}/${message.writeTid}`],
+        fromActor:  pidTidToActor[`${message.fromPid}/${message.writeTid}`],
         fromTime:   message.timeStamp - message.sinceHandoff - startTime,
-        toActor:    pidToActor[`${message.fromPid}/${message.writeTid}`],
+        toActor:    pidTidToActor[`${message.fromPid}/${message.writeTid}`],
         toTime:     message.timeStamp - message.sinceWrite - startTime,
         style:      delayStyle,
         labelStyle: labelStyle,
@@ -221,9 +226,9 @@ function writeGraph(messages, filename) {
 
     // Writing I/O thread to reading I/O thread
     rungs.push({
-      fromActor:  pidToActor[`${message.fromPid}/${message.writeTid}`],
+      fromActor:  pidTidToActor[`${message.fromPid}/${message.writeTid}`],
       fromTime:   message.timeStamp - message.sinceWrite - startTime,
-      toActor:    pidToActor[`${message.toPid}/${message.readTid}`],
+      toActor:    pidTidToActor[`${message.toPid}/${message.readTid}`],
       toTime:     message.timeStamp - message.sinceRead - startTime,
       style:      lineStyle,
       labelStyle: labelStyle,
@@ -233,9 +238,9 @@ function writeGraph(messages, filename) {
 
     // Reading I/O thread to receiving/processing thread
     rungs.push({
-      fromActor:  pidToActor[`${message.toPid}/${message.readTid}`],
+      fromActor:  pidTidToActor[`${message.toPid}/${message.readTid}`],
       fromTime:   message.timeStamp - message.sinceRead - startTime,
-      toActor:    pidToActor[`${message.toPid}/${message.thread}`],
+      toActor:    pidTidToActor[`${message.toPid}/${message.thread}`],
       toTime:     message.timeStamp - startTime,
       style:      lineStyle,
       labelStyle: labelStyle,
@@ -250,7 +255,6 @@ function writeGraph(messages, filename) {
       (canvasHeight - actorLabelHeight * 2) +
       actorLabelHeight * 2);
   };
-
 
   // Label the lines with times
   let offset = Math.floor((startTime - firstLogTimestamp)/1000);
@@ -280,9 +284,46 @@ function writeGraph(messages, filename) {
       font(rung.labelStyle).linkTo(rung.link);
   });
 
+  // Add function calls for worker TIDs
+  if (profile) {
+    actorIds.forEach((pidTid, i) => {
+
+      if (workerTids.has(pidTid)) {
+        const [pid, tid] = pidTid.split('/');
+        plotCalls(canvas, profile, pid, tid, startTime, endTime,
+                  lifelineX[i] + 10, timeToY);
+      }
+    });
+  }
+
   const out = fs.createWriteStream(filename, {flags: 'w'});
   out.write(canvas.svg());
   out.end();
+}
+
+function plotCalls(canvas, profile, pid, tid, startTime, endTime,
+                   x, timeToY) {
+  const height = 5;
+  profile.threads.forEach(thread => {
+    if (thread.tid == tid && thread.pid == pid) {
+      console.log(`Adding calls for ${thread.processName}/${thread.name}`);
+      for (let i = 0; i < thread.samples.length; i++) {
+        let time = profile.meta.startTime + thread.samples.time[i];
+        if (time > startTime && time < endTime) {
+          let stackIndex = thread.samples.stack[i];
+          let functionIndex = thread.stackTable.frame[stackIndex];
+          let functionNameIndex = thread.funcTable.name[functionIndex];
+          let functionName =
+              (thread.funcTable.isJS[functionIndex]?"[js] ":"") +
+              thread.stringArray[functionNameIndex];
+          // console.log(functionName);
+          let text = canvas.text(functionName).
+            move(x ,timeToY(time - startTime) - height/2).
+            font({size: height});
+        }
+      }
+    }
+  });
 }
 
 // Returns an array of arrays, where each sub-array is a

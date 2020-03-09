@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-my $doc = "<html><body><ol>\n";
+my $doc = "<html><head><meta charset='UTF-8'></head><body><ol>\n";
 
 opendir(DIR, '.') || die $!;
 while ($entry = readdir(DIR)) {
