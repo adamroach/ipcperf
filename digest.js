@@ -183,6 +183,7 @@ function writeGraph(messages, filename, profile) {
       size(canvasWidth,canvasHeight);
   canvas.clear();
 
+  // Draw the lifelines
   lifelineX.forEach((x, i) => {
     canvas.line(x, actorLabelHeight, x, canvasHeight).stroke({ width: 2 });
     const label = canvas.text(labels[i]);
@@ -311,12 +312,14 @@ function plotCalls(canvas, profile, pid, tid, startTime, endTime,
         let time = profile.meta.startTime + thread.samples.time[i];
         if (time > startTime && time < endTime) {
           let stackIndex = thread.samples.stack[i];
-          let functionIndex = thread.stackTable.frame[stackIndex];
+          let frameIndex = thread.stackTable.frame[stackIndex];
+          let functionIndex = thread.frameTable.func[frameIndex];
           let functionNameIndex = thread.funcTable.name[functionIndex];
           let functionName =
               (thread.funcTable.isJS[functionIndex]?"[js] ":"") +
               thread.stringArray[functionNameIndex];
-          // console.log(functionName);
+          let fn2 = thread.stringArray[thread.funcTable.name[thread.frameTable.func[frameIndex]]];
+          //console.log(functionName);
           let text = canvas.text(functionName).
             move(x ,timeToY(time - startTime) - height/2).
             font({size: height});
