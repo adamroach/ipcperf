@@ -132,7 +132,7 @@ function writeGraph(messages, filename, profile) {
 
   const actorLabelHeight = 20;
   const startTime = messages[0].timeStamp - messages[0].sinceSend;
-  const endTime = messages[messages.length-1].timeStamp;
+  const endTime = messages.reduce((a,c) => Math.max(a,c.timeStamp), 0);
   const duration = endTime - startTime;
 
   // Figure out how many threads we're showing
@@ -140,7 +140,11 @@ function writeGraph(messages, filename, profile) {
   let writeTids = new Set();
   let readTids = new Set();
   let workerTids = new Set();
+  let ioSender;
+  let ioReceiver;
   messages.forEach(msg => {
+    ioSender = `${msg.fromPid}/${msg.writeTid}`;
+    ioReceiver = `${msg.toPid}/${msg.readTid}`;
     sendTids.add(`${msg.fromPid}/${msg.sendTid}`);
     writeTids.add(`${msg.fromPid}/${msg.writeTid}`);
     readTids.add(`${msg.toPid}/${msg.readTid}`);
@@ -177,6 +181,9 @@ function writeGraph(messages, filename, profile) {
     return x;
   })();
 
+  let interProcessX = (lifelineX[pidTidToActor[ioSender]] +
+                       lifelineX[pidTidToActor[ioReceiver]]) / 2;
+
   const messageHeight = 10;
 
   const canvas = SVG(document.documentElement).
@@ -189,6 +196,10 @@ function writeGraph(messages, filename, profile) {
     const label = canvas.text(labels[i]);
     label.center(x, actorLabelHeight/2);
   });
+
+  // Draw a line to separate the processes
+  canvas.line(interProcessX, 0, interProcessX, canvasHeight).
+    stroke({width: 2, color: '#ffb080', dasharray: '2,2'});
 
   // Generate the rungs for the diagram
   let rungs = [];
@@ -285,11 +296,10 @@ function writeGraph(messages, filename, profile) {
       font(rung.labelStyle).linkTo(rung.link);
   });
 
-  // Add function calls for worker TIDs
+  // Add function calls for receiving process TIDs
   if (profile) {
     actorIds.forEach((pidTid, i) => {
-
-      if (workerTids.has(pidTid)) {
+      if (workerTids.has(pidTid) || readTids.has(pidTid)) {
         const [pid, tid] = pidTid.split('/');
         plotCalls(canvas, profile, pid, tid, startTime, endTime,
                   lifelineX[i] + 10, timeToY);
@@ -318,11 +328,12 @@ function plotCalls(canvas, profile, pid, tid, startTime, endTime,
           let functionName =
               (thread.funcTable.isJS[functionIndex]?"[js] ":"") +
               thread.stringArray[functionNameIndex];
-          let fn2 = thread.stringArray[thread.funcTable.name[thread.frameTable.func[frameIndex]]];
           //console.log(functionName);
           let text = canvas.text(functionName).
             move(x ,timeToY(time - startTime) - height/2).
-            font({size: height});
+            font({size: height}).
+            linkTo("https://searchfox.org/mozilla-central/search?q=" +
+                   functionName);
         }
       }
     }
