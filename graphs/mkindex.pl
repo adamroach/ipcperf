@@ -1,14 +1,19 @@
 #!/usr/bin/perl
 
-my $doc = "<html><head><meta charset='UTF-8'></head><body><ol>\n";
+my $doc = "<html><head><meta charset='UTF-8'></head><body><table>\n";
 
 opendir(DIR, '.') || die $!;
-while ($entry = readdir(DIR)) {
+@files = readdir(DIR);
+
+
+#foreach $entry (sort {(stat($a))[9] <=> (stat($b))[9]} @files) {
+foreach $entry (sort {(split('-',$a))[4] <=> (split('-',$b))[4]} @files) {
   if ($entry =~ /\.svg$/) {
-    $doc .= "<li><a href='$entry'>$entry</a></li>\n";
+    $date = localtime((split('-',$entry))[4]/1000);
+    $doc .= "<tr><td>".(++$i).".</td><td><a href='$entry'>$entry</a></td><td>$date</td></tr>\n";
   }
 }
 closedir(DIR);
-$doc .= "</ol></body></html>\n";
+$doc .= "</table></body></html>\n";
 
 print $doc;

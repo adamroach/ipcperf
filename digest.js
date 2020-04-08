@@ -3,6 +3,7 @@
 const output_csv = 'digest.csv';
 const output_json = 'digest.json';
 const graphDirectory = 'graphs';
+const undname = '/c/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.24.28314/bin/Hostx64/x64/undname.exe';
 
 // Modules
 const fs = require('fs');
@@ -312,6 +313,15 @@ function writeGraph(messages, filename, profile) {
   out.end();
 }
 
+function frameToName(thread, frameIndex) {
+  let functionIndex = thread.frameTable.func[frameIndex];
+  let functionNameIndex = thread.funcTable.name[functionIndex];
+  let functionName =
+     (thread.funcTable.isJS[functionIndex]?"[js] ":"") +
+     thread.stringArray[functionNameIndex];
+  return functionName;
+}
+
 function plotCalls(canvas, profile, pid, tid, startTime, endTime,
                    x, timeToY) {
   const height = 5;
@@ -323,17 +333,24 @@ function plotCalls(canvas, profile, pid, tid, startTime, endTime,
         if (time > startTime && time < endTime) {
           let stackIndex = thread.samples.stack[i];
           let frameIndex = thread.stackTable.frame[stackIndex];
-          let functionIndex = thread.frameTable.func[frameIndex];
-          let functionNameIndex = thread.funcTable.name[functionIndex];
-          let functionName =
-              (thread.funcTable.isJS[functionIndex]?"[js] ":"") +
-              thread.stringArray[functionNameIndex];
-          //console.log(functionName);
-          let text = canvas.text(functionName).
+
+          // Walk up the prefix entries to build the whole stack
+          let stack = [];
+          while (frameIndex > 0) {
+            stack.push(frameToName(thread,frameIndex));
+            frameIndex = thread.stackTable.prefix[frameIndex];
+          }
+
+          let text = canvas.text(stack[0]).
             move(x ,timeToY(time - startTime) - height/2).
             font({size: height}).
+/*
             linkTo("https://searchfox.org/mozilla-central/search?q=" +
-                   functionName);
+                   stack[0]).
+            attr('tooltip',stack.join("|"));
+*/
+            linkTo("data:text/plain," + stack.join("%0a%0d"));
+
         }
       }
     }
