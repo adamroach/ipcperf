@@ -1,0 +1,395 @@
+
+    <style>
+      table td + td {border-left: 1px solid black}
+      table tr + tr {border-left: 1px solid black}
+      :target { background-color: #ddd }
+    </style>
+    <table>
+      <tr>
+        <th>Time</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Seq</th>
+        <th>#</th>
+        <th>Message</th>
+        <th>Size</th>
+        <th>IO Recv</th>
+        <th>IO Write</th>
+        <th>IO Read</th>
+        <th>Process</th>
+      </tr>
+
+      <tr style="color:red" id="1">
+        <td>1586822946459.975
+             (start + 0 ms)</td>
+        <td>Parent Process /
+            119444</td>
+        <td>Web Content /
+            121188</td>
+        <td>367</td>
+        <td><b>1</b></td>
+        <td>PHttpBackgroundChannel::Msg_OnTransportAndData</td>
+        <td>848</td>
+        <td>0.014</td>
+        <td>0.017</td>
+        <td>0.127</td>
+        <td>0.199</td>
+      </tr>
+
+      <tr style="color:orange" id="2">
+        <td>1586822946459.975
+             (start + 0.018 ms)</td>
+        <td>Parent Process /
+            119444</td>
+        <td>Web Content /
+            121188</td>
+        <td>368</td>
+        <td><b>2</b></td>
+        <td>PHttpBackgroundChannel::Msg_OnStopRequest</td>
+        <td>656</td>
+        <td>0</td>
+        <td>0.005</td>
+        <td>0.119</td>
+        <td>0.181</td>
+      </tr>
+
+      <tr style="color:brown" id="3">
+        <td>1586822946492.983
+             (start + 32.544 ms)</td>
+        <td>Parent Process /
+            119444</td>
+        <td>Web Content /
+            121188</td>
+        <td>371</td>
+        <td><b>3</b></td>
+        <td>PHttpBackgroundChannel::Msg_OnStopRequest</td>
+        <td>660</td>
+        <td>0.01</td>
+        <td>0.333</td>
+        <td>0.597</td>
+        <td>0.663</td>
+      </tr>
+
+      <tr style="color:green" id="4">
+        <td>1586822946492.983
+             (start + 32.801 ms)</td>
+        <td>Parent Process /
+            119444</td>
+        <td>Web Content /
+            121188</td>
+        <td>370</td>
+        <td><b>4</b></td>
+        <td>PHttpBackgroundChannel::Msg_OnTransportAndData</td>
+        <td>46020</td>
+        <td>0</td>
+        <td>0.008</td>
+        <td>0.353</td>
+        <td>0.406</td>
+      </tr>
+
+      <tr style="color:blue" id="5">
+        <td>1586822946492.983
+             (start + 32.802 ms)</td>
+        <td>Parent Process /
+            119444</td>
+        <td>Web Content /
+            121188</td>
+        <td>372</td>
+        <td><b>5</b></td>
+        <td>PHttpBackgroundChannel::Msg_OnStartRequestSent</td>
+        <td>120</td>
+        <td>0.013</td>
+        <td>0.296</td>
+        <td>0.329</td>
+        <td>0.405</td>
+      </tr>
+
+      <tr style="color:purple" id="6">
+        <td>1586822946492.983
+             (start + 32.995 ms)</td>
+        <td>Parent Process /
+            119444</td>
+        <td>Web Content /
+            121188</td>
+        <td>369</td>
+        <td><b>6</b></td>
+        <td>PHttpBackgroundChannel::Msg_OnStartRequestSent</td>
+        <td>120</td>
+        <td>0</td>
+        <td>0.012</td>
+        <td>0.081</td>
+        <td>0.212</td>
+      </tr>
+
+      <tr style="color:red" id="7">
+        <td>1586822946493.982
+             (start + 33.688 ms)</td>
+        <td>Parent Process /
+            119444</td>
+        <td>Web Content /
+            121188</td>
+        <td>373</td>
+        <td><b>7</b></td>
+        <td>PHttpBackgroundChannel::Msg_OnTransportAndData</td>
+        <td>46020</td>
+        <td>0.013</td>
+        <td>0.274</td>
+        <td>0.454</td>
+        <td>0.518</td>
+      </tr>
+
+      <tr style="color:orange" id="8">
+        <td>1586822946493.982
+             (start + 33.906 ms)</td>
+        <td>Parent Process /
+            119444</td>
+        <td>Web Content /
+            121188</td>
+        <td>374</td>
+        <td><b>8</b></td>
+        <td>PHttpBackgroundChannel::Msg_OnStopRequest</td>
+        <td>660</td>
+        <td>0.008</td>
+        <td>0.202</td>
+        <td>0.231</td>
+        <td>0.3</td>
+      </tr>
+
+      <tr style="color:brown" id="9">
+        <td>1586822946522.989
+             (start + 62.9 ms)</td>
+        <td>Parent Process /
+            119444</td>
+        <td>Web Content /
+            121188</td>
+        <td>376</td>
+        <td><b>9</b></td>
+        <td>PHttpBackgroundChannel::Msg_OnTransportAndData</td>
+        <td>18392</td>
+        <td>0</td>
+        <td>0.007</td>
+        <td>0.113</td>
+        <td>0.313</td>
+      </tr>
+
+      <tr style="color:green" id="10">
+        <td>1586822946522.989
+             (start + 62.908 ms)</td>
+        <td>Parent Process /
+            119444</td>
+        <td>Web Content /
+            121188</td>
+        <td>375</td>
+        <td><b>10</b></td>
+        <td>PHttpBackgroundChannel::Msg_OnStartRequestSent</td>
+        <td>120</td>
+        <td>0</td>
+        <td>0.018</td>
+        <td>0.032</td>
+        <td>0.305</td>
+      </tr>
+
+      <tr style="color:blue" id="11">
+        <td>1586822946659.021
+             (start + 67.611 ms)</td>
+        <td>Parent Process /
+            119444</td>
+        <td>Web Content /
+            121188</td>
+        <td>378</td>
+        <td><b>11</b></td>
+        <td>PHttpBackgroundChannel::Msg_OnStopRequest</td>
+        <td>656</td>
+        <td>0.008</td>
+        <td>131.366</td>
+        <td>131.487</td>
+        <td>131.634</td>
+      </tr>
+
+      <tr style="color:purple" id="12">
+        <td>1586822946659.021
+             (start + 67.621 ms)</td>
+        <td>Parent Process /
+            119444</td>
+        <td>Web Content /
+            121188</td>
+        <td>377</td>
+        <td><b>12</b></td>
+        <td>PHttpBackgroundChannel::Msg_OnTransportAndData</td>
+        <td>52272</td>
+        <td>0</td>
+        <td>0.012</td>
+        <td>131.422</td>
+        <td>131.624</td>
+      </tr>
+
+      <tr style="color:red" id="13">
+        <td>1586822948445.425
+             (start + 1984.589 ms)</td>
+        <td>Parent Process /
+            119444</td>
+        <td>Web Content /
+            121188</td>
+        <td>381</td>
+        <td><b>13</b></td>
+        <td>PHttpBackgroundChannel::Msg_OnStopRequest</td>
+        <td>656</td>
+        <td>0</td>
+        <td>0.016</td>
+        <td>0.69</td>
+        <td>1.06</td>
+      </tr>
+
+      <tr style="color:orange" id="14">
+        <td>1586822948445.425
+             (start + 1984.643 ms)</td>
+        <td>Parent Process /
+            119444</td>
+        <td>Web Content /
+            121188</td>
+        <td>379</td>
+        <td><b>14</b></td>
+        <td>PHttpBackgroundChannel::Msg_OnStartRequestSent</td>
+        <td>120</td>
+        <td>0</td>
+        <td>0.027</td>
+        <td>0.069</td>
+        <td>1.006</td>
+      </tr>
+
+      <tr style="color:brown" id="15">
+        <td>1586822948445.425
+             (start + 1984.654 ms)</td>
+        <td>Parent Process /
+            119444</td>
+        <td>Web Content /
+            121188</td>
+        <td>380</td>
+        <td><b>15</b></td>
+        <td>PHttpBackgroundChannel::Msg_OnTransportAndData</td>
+        <td>204</td>
+        <td>0</td>
+        <td>0.009</td>
+        <td>0.398</td>
+        <td>0.995</td>
+      </tr>
+
+      <tr style="color:green" id="16">
+        <td>1586822948474.43
+             (start + 2014.315 ms)</td>
+        <td>Parent Process /
+            119444</td>
+        <td>Web Content /
+            121188</td>
+        <td>383</td>
+        <td><b>16</b></td>
+        <td>PHttpBackgroundChannel::Msg_OnTransportAndData</td>
+        <td>956</td>
+        <td>0</td>
+        <td>0.009</td>
+        <td>0.138</td>
+        <td>0.339</td>
+      </tr>
+
+      <tr style="color:blue" id="17">
+        <td>1586822948474.43
+             (start + 2014.341 ms)</td>
+        <td>Parent Process /
+            119444</td>
+        <td>Web Content /
+            121188</td>
+        <td>384</td>
+        <td><b>17</b></td>
+        <td>PHttpBackgroundChannel::Msg_OnStopRequest</td>
+        <td>656</td>
+        <td>0</td>
+        <td>0.006</td>
+        <td>0.149</td>
+        <td>0.313</td>
+      </tr>
+
+      <tr style="color:purple" id="18">
+        <td>1586822948474.43
+             (start + 2014.413 ms)</td>
+        <td>Parent Process /
+            119444</td>
+        <td>Web Content /
+            121188</td>
+        <td>382</td>
+        <td><b>18</b></td>
+        <td>PHttpBackgroundChannel::Msg_OnStartRequestSent</td>
+        <td>120</td>
+        <td>0</td>
+        <td>0.016</td>
+        <td>0.063</td>
+        <td>0.241</td>
+      </tr>
+
+      <tr style="color:red" id="19">
+        <td>1586822948760.496
+             (start + 2300.143 ms)</td>
+        <td>Parent Process /
+            119444</td>
+        <td>Web Content /
+            121188</td>
+        <td>386</td>
+        <td><b>19</b></td>
+        <td>PHttpBackgroundChannel::Msg_OnTransportAndData</td>
+        <td>5484</td>
+        <td>0</td>
+        <td>0.013</td>
+        <td>0.195</td>
+        <td>0.577</td>
+      </tr>
+
+      <tr style="color:orange" id="20">
+        <td>1586822948760.496
+             (start + 2300.344 ms)</td>
+        <td>Parent Process /
+            119444</td>
+        <td>Web Content /
+            121188</td>
+        <td>385</td>
+        <td><b>20</b></td>
+        <td>PHttpBackgroundChannel::Msg_OnStartRequestSent</td>
+        <td>120</td>
+        <td>0</td>
+        <td>0.011</td>
+        <td>0.086</td>
+        <td>0.376</td>
+      </tr>
+
+      <tr style="color:brown" id="21">
+        <td>1586822948760.496
+             (start + 2300.428 ms)</td>
+        <td>Parent Process /
+            119444</td>
+        <td>Web Content /
+            121188</td>
+        <td>389</td>
+        <td><b>21</b></td>
+        <td>PHttpBackgroundChannel::Msg_OnTransportAndData</td>
+        <td>21412</td>
+        <td>0</td>
+        <td>0.011</td>
+        <td>0.2</td>
+        <td>0.292</td>
+      </tr>
+
+      <tr style="color:green" id="22">
+        <td>1586822948760.496
+             (start + 2300.57 ms)</td>
+        <td>Parent Process /
+            119444</td>
+        <td>Web Content /
+            121188</td>
+        <td>388</td>
+        <td><b>22</b></td>
+        <td>PHttpBackgroundChannel::Msg_OnStartRequestSent</td>
+        <td>120</td>
+        <td>0</td>
+        <td>0.017</td>
+        <td>0.049</td>
+        <td>0.15</td>
+      </tr>
+</table>

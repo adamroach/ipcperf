@@ -3,7 +3,6 @@
 const output_csv = 'digest.csv';
 const output_json = 'digest.json';
 const graphDirectory = 'graphs';
-const undname = '/c/Program Files (x86)/Microsoft Visual Studio/2019/Community/VC/Tools/MSVC/14.24.28314/bin/Hostx64/x64/undname.exe';
 
 // Modules
 const fs = require('fs');
@@ -314,9 +313,9 @@ function writeGraph(messages, filename, profile) {
 }
 
 function frameToName(thread, frameIndex) {
-  let functionIndex = thread.frameTable.func[frameIndex];
-  let functionNameIndex = thread.funcTable.name[functionIndex];
-  let functionName =
+  const functionIndex = thread.frameTable.func[frameIndex];
+  const functionNameIndex = thread.funcTable.name[functionIndex];
+  const functionName =
      (thread.funcTable.isJS[functionIndex]?"[js] ":"") +
      thread.stringArray[functionNameIndex];
   return functionName;

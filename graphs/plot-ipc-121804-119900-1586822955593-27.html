@@ -1,0 +1,480 @@
+
+    <style>
+      table td + td {border-left: 1px solid black}
+      table tr + tr {border-left: 1px solid black}
+      :target { background-color: #ddd }
+    </style>
+    <table>
+      <tr>
+        <th>Time</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Seq</th>
+        <th>#</th>
+        <th>Message</th>
+        <th>Size</th>
+        <th>IO Recv</th>
+        <th>IO Write</th>
+        <th>IO Read</th>
+        <th>Process</th>
+      </tr>
+
+      <tr style="color:red" id="1">
+        <td>1586822955593.04
+             (start + 0 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>703</td>
+        <td><b>1</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.046</td>
+        <td>0.109</td>
+        <td>3473.203</td>
+      </tr>
+
+      <tr style="color:orange" id="2">
+        <td>1586822955594.04
+             (start + 32.089 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>704</td>
+        <td><b>2</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.039</td>
+        <td>0.092</td>
+        <td>3442.114</td>
+      </tr>
+
+      <tr style="color:brown" id="3">
+        <td>1586822955594.04
+             (start + 46.627 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>705</td>
+        <td><b>3</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.047</td>
+        <td>0.141</td>
+        <td>3427.576</td>
+      </tr>
+
+      <tr style="color:green" id="4">
+        <td>1586822955594.04
+             (start + 82.467 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>706</td>
+        <td><b>4</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.042</td>
+        <td>0.09</td>
+        <td>3391.736</td>
+      </tr>
+
+      <tr style="color:blue" id="5">
+        <td>1586822955594.04
+             (start + 101.607 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>707</td>
+        <td><b>5</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.051</td>
+        <td>0.104</td>
+        <td>3372.596</td>
+      </tr>
+
+      <tr style="color:purple" id="6">
+        <td>1586822955594.04
+             (start + 112.375 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>708</td>
+        <td><b>6</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.039</td>
+        <td>0.074</td>
+        <td>3361.828</td>
+      </tr>
+
+      <tr style="color:red" id="7">
+        <td>1586822955595.04
+             (start + 657.714 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>732</td>
+        <td><b>7</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.055</td>
+        <td>0.099</td>
+        <td>2817.489</td>
+      </tr>
+
+      <tr style="color:orange" id="8">
+        <td>1586822955595.04
+             (start + 687.63 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>734</td>
+        <td><b>8</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.063</td>
+        <td>0.143</td>
+        <td>2787.573</td>
+      </tr>
+
+      <tr style="color:brown" id="9">
+        <td>1586822955595.04
+             (start + 723.783 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>735</td>
+        <td><b>9</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.032</td>
+        <td>0.086</td>
+        <td>2751.42</td>
+      </tr>
+
+      <tr style="color:green" id="10">
+        <td>1586822955595.04
+             (start + 735.421 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>736</td>
+        <td><b>10</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.075</td>
+        <td>0.131</td>
+        <td>2739.782</td>
+      </tr>
+
+      <tr style="color:blue" id="11">
+        <td>1586822955595.04
+             (start + 754.025 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>737</td>
+        <td><b>11</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.08</td>
+        <td>0.182</td>
+        <td>2721.178</td>
+      </tr>
+
+      <tr style="color:purple" id="12">
+        <td>1586822955595.04
+             (start + 769.21 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>738</td>
+        <td><b>12</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.049</td>
+        <td>0.083</td>
+        <td>2705.993</td>
+      </tr>
+
+      <tr style="color:red" id="13">
+        <td>1586822955595.04
+             (start + 820.62 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>739</td>
+        <td><b>13</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.062</td>
+        <td>0.167</td>
+        <td>2654.583</td>
+      </tr>
+
+      <tr style="color:orange" id="14">
+        <td>1586822955595.04
+             (start + 838.331 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>740</td>
+        <td><b>14</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.059</td>
+        <td>0.117</td>
+        <td>2636.872</td>
+      </tr>
+
+      <tr style="color:brown" id="15">
+        <td>1586822955595.04
+             (start + 856.016 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>741</td>
+        <td><b>15</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.11</td>
+        <td>0.217</td>
+        <td>2619.187</td>
+      </tr>
+
+      <tr style="color:green" id="16">
+        <td>1586822955595.04
+             (start + 927.705 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>742</td>
+        <td><b>16</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.116</td>
+        <td>0.191</td>
+        <td>2547.498</td>
+      </tr>
+
+      <tr style="color:blue" id="17">
+        <td>1586822955595.04
+             (start + 935.6 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>743</td>
+        <td><b>17</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.116</td>
+        <td>0.203</td>
+        <td>2539.603</td>
+      </tr>
+
+      <tr style="color:purple" id="18">
+        <td>1586822955595.04
+             (start + 956.226 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>744</td>
+        <td><b>18</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.128</td>
+        <td>193.121</td>
+        <td>2518.977</td>
+      </tr>
+
+      <tr style="color:red" id="19">
+        <td>1586822955595.04
+             (start + 972.494 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>745</td>
+        <td><b>19</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.072</td>
+        <td>176.884</td>
+        <td>2502.709</td>
+      </tr>
+
+      <tr style="color:orange" id="20">
+        <td>1586822955595.04
+             (start + 989.476 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>746</td>
+        <td><b>20</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.048</td>
+        <td>159.901</td>
+        <td>2485.727</td>
+      </tr>
+
+      <tr style="color:brown" id="21">
+        <td>1586822955595.04
+             (start + 1042.591 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>747</td>
+        <td><b>21</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.045</td>
+        <td>106.786</td>
+        <td>2432.612</td>
+      </tr>
+
+      <tr style="color:green" id="22">
+        <td>1586822955595.04
+             (start + 1057.065 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>748</td>
+        <td><b>22</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.071</td>
+        <td>92.312</td>
+        <td>2418.138</td>
+      </tr>
+
+      <tr style="color:blue" id="23">
+        <td>1586822955595.04
+             (start + 1075.481 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>749</td>
+        <td><b>23</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.045</td>
+        <td>73.896</td>
+        <td>2399.722</td>
+      </tr>
+
+      <tr style="color:purple" id="24">
+        <td>1586822955595.04
+             (start + 1092.311 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>750</td>
+        <td><b>24</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.065</td>
+        <td>57.064</td>
+        <td>2382.892</td>
+      </tr>
+
+      <tr style="color:red" id="25">
+        <td>1586822955595.04
+             (start + 1111.331 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>751</td>
+        <td><b>25</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.093</td>
+        <td>38.044</td>
+        <td>2363.872</td>
+      </tr>
+
+      <tr style="color:orange" id="26">
+        <td>1586822955595.04
+             (start + 1116.989 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>752</td>
+        <td><b>26</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.075</td>
+        <td>32.385</td>
+        <td>2358.214</td>
+      </tr>
+
+      <tr style="color:brown" id="27">
+        <td>1586822955595.04
+             (start + 1189.194 ms)</td>
+        <td>121804 /
+            Compositor</td>
+        <td>Web Content /
+            GeckoMain</td>
+        <td>753</td>
+        <td><b>27</b></td>
+        <td>PCompositorBridge::Msg_DidComposite</td>
+        <td>208</td>
+        <td>0</td>
+        <td>0.184</td>
+        <td>0.342</td>
+        <td>2286.009</td>
+      </tr>
+</table>
