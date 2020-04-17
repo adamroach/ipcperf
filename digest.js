@@ -134,6 +134,11 @@ function writeGraph(messages, filename, profile) {
   const startTime = messages[0].timeStamp - messages[0].sinceSend;
   const endTime = messages.reduce((a,c) => Math.max(a,c.timeStamp), 0);
   const duration = endTime - startTime;
+  console.log(`  Graph is ${duration} ms long (${startTime} - ${endTime})`);
+  if (duration > 3000) {
+    console.log("  That's too long. Skipping.");
+    return;
+  }
 
   // Figure out how many threads we're showing
   let sendTids = new Set();
@@ -326,7 +331,7 @@ function plotCalls(canvas, profile, pid, tid, startTime, endTime,
   const height = 5;
   profile.threads.forEach(thread => {
     if (thread.tid == tid && thread.pid == pid) {
-      console.log(`Adding calls for ${thread.processName}/${thread.name}`);
+      console.log(`  Adding calls for ${thread.processName}/${thread.name}`);
       for (let i = 0; i < thread.samples.length; i++) {
         let time = profile.meta.startTime + thread.samples.time[i];
         if (time > startTime && time < endTime) {
@@ -377,11 +382,17 @@ function findInteresting(log, field, percent, extra = 10) {
     remaining.delete(entry.index);
     let firstIndex = entry.index;
     let lastIndex = entry.index;
+    let initialTimeStamp = entry.timeStamp;
 
     // Work backwards to beginning of interesting segment
     let overshoot = 0;
     while (firstIndex > 0 && overshoot < extra) {
       firstIndex--;
+      if ((initialTimeStamp - log[firstIndex].timeStamp) > 1000) {
+        console.log("Cutting of start of diagram at 1000 ms");
+        firstIndex++;
+        break;
+      }
       if (log[firstIndex].fromPid == entry.fromPid &&
           log[firstIndex].toPid == entry.toPid) {
         sequence.push(log[firstIndex]);
@@ -398,6 +409,11 @@ function findInteresting(log, field, percent, extra = 10) {
     overshoot = 0;
     while (lastIndex < log.length - 1 && overshoot < extra) {
       lastIndex++
+      if ((log[lastIndex].timeStamp - initialTimeStamp) > 1000) {
+        console.log("Cutting of end of diagram at 1000 ms");
+        lastIndex--;
+        break;
+      }
       if (log[lastIndex].fromPid == entry.fromPid &&
           log[lastIndex].toPid == entry.toPid) {
         sequence.push(log[lastIndex]);
